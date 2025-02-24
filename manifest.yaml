@@ -1,0 +1,33 @@
+version: 0.0.1
+type: plugin
+author: yevanchen
+name: mem0
+label:
+  en_US: mem0
+  ja_JP: mem0
+  zh_Hans: mem0
+  pt_BR: mem0
+description:
+  en_US: Dify integration for mem0
+  ja_JP: mem0のDify統合
+  zh_Hans: mem0 的 Dify 集成
+  pt_BR: Integração Dify para mem0
+icon: mem0.png
+resource:
+  memory: 268435456
+  permission: {}
+plugins:
+  tools:
+    - provider/mem0.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-02-24T15:05:39.306706+08:00
+privacy: PRIVACY.md
+verified: false
