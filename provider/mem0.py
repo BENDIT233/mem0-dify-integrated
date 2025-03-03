@@ -9,7 +9,8 @@ class Mem0Provider(ToolProvider):
     def _validate_credentials(self, credentials: dict[str, Any]) -> None:
         try:
             # 使用RetrieveMem0Tool来验证凭据
-            for _ in RetrieveMem0Tool.from_credentials(credentials, user_id="").invoke(
+            tool = RetrieveMem0Tool.from_credentials(credentials)
+            for _ in tool.invoke(
                 tool_parameters={"query": "test", "user_id": "validation_test"}
             ):
                 pass

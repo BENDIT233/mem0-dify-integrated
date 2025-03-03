@@ -15,7 +15,9 @@ description:
 icon: mem0.png
 resource:
   memory: 268435456
-  permission: {}
+  permission:
+    tool:
+      enabled: true
 plugins:
   tools:
     - provider/mem0.yaml
