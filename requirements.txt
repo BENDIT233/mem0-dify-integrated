@@ -1,2 +1,1 @@
 dify_plugin
-mem0ai
