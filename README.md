@@ -81,5 +81,4 @@ Backend logic:
 - OpenAI Compatibility
 - Custom Prompts
 
-For feature requests or discussions, contact evanchen@dify.ai
 
