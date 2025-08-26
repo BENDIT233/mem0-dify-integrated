@@ -7,21 +7,34 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 
 class RetrieveMem0Tool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
-        # Get API key from credentials
-        api_key = self.runtime.credentials["mem0_api_key"]
+        # Get credentials
+        api_key = self.runtime.credentials.get("mem0_api_key", "").strip()
+        base_url = self.runtime.credentials.get("mem0_base_url", "").strip()
         
-        # Prepare payload for search
+        # Use default base URL if not provided
+        if not base_url:
+            base_url = "https://api.mem0.ai"
+        
+        # Construct full API URL
+        api_url = f"{base_url}/v1/memories/search/"
+        
+        # Prepare payload
         payload = {
             "query": tool_parameters["query"],
             "user_id": tool_parameters["user_id"]
         }
         
+        # Prepare headers
+        headers = {"Content-Type": "application/json"}
+        if api_key:
+            headers["Authorization"] = f"Token {api_key}"
+        
         # Make direct HTTP request to mem0 API
         try:
             response = httpx.post(
-                "https://api.mem0.ai/v1/memories/search/",
+                api_url,
                 json=payload,
-                headers={"Authorization": f"Token {api_key}"},
+                headers=headers,
                 timeout=30
             )
             response.raise_for_status()
